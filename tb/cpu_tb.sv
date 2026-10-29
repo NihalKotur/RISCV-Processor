@@ -16,7 +16,7 @@ module pc_tb;
     always #5 clk = ~clk;
 
     initial begin
-        $dumpfile("pc.vcd");
+        $dumpfile("pc.sv");
         $dumpvars(0, pc_tb);
 
         clk = 0;
