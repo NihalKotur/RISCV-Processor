@@ -1,0 +1,7 @@
+# Simulation and compilation artifacts
+*.vvp
+*.vcd
+*.svf
+
+# macOS system files
+.DS_Store

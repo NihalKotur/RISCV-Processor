@@ -1,0 +1,28 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "type": "shell",
+            "label": "Compile",
+            "command": "iverilog",
+            "args": [
+                "-g2012",
+                "-o",
+                "sim/pc_tb.vvp",
+                "rtl/pc.sv",
+                "tb/pc_tb.sv"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": ["$gcc"]
+        },
+        {
+            "type": "shell",
+            "label": "Run PC Simulation",
+            "command": "cd sim && vvp pc_tb.vvp",
+            "group": "test"
+        }
+    ]
+}
