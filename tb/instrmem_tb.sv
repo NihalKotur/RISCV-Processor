@@ -14,18 +14,17 @@ module instrmem_tb;
     $dumpvars(0, instrmem_tb);
 
     addr = 32'h0;
-    #5;
+    #5
 
     addr = 32'h4;
-    #5;
+    #5
 
     addr = 32'h8;
-    #5;
+    #5
 
     addr = 32'h12;
-    #5;
+    #5
 
     $finish;
   end
-
 endmodule

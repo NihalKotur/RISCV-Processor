@@ -57,5 +57,4 @@ module datamem_tb;
     #5;
     $finish;
   end
-
 endmodule
