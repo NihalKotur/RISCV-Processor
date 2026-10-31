@@ -1,0 +1,3 @@
+00000013 // addi x0, x0, 0 (do nothing)
+00100293 // addi x5, x0, 1 (puts the number 1 into register x5)
+00228293 // addi x5, x5, 2 (adds 2 to register x5)
