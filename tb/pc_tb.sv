@@ -7,16 +7,15 @@ module pc_tb;
   logic [31:0] pc;
 
   pc uut (
-       .clk(clk),
-       .n_rst(n_rst),
-       .next_pc(next_pc),
-       .pc(pc)
-     );
+    .clk(clk),
+    .n_rst(n_rst),
+    .next_pc(next_pc),
+    .pc(pc)
+    );
 
   always #5 clk = ~clk;
 
-  initial
-  begin
+  initial begin
     $dumpfile("sim/pc.vcd");
     $dumpvars(0, pc_tb);
 
@@ -35,5 +34,6 @@ module pc_tb;
     #20;
     $display("Simulation Done!");
     $finish;
-  end
+    end
+
 endmodule
