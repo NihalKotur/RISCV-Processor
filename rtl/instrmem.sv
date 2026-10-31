@@ -12,5 +12,4 @@ module instrmem (
   always_comb begin
     instr = instr_array[addr[31:2]];
   end
-
 endmodule

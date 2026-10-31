@@ -35,5 +35,4 @@ module pc_tb;
     $display("Simulation Done!");
     $finish;
     end
-
 endmodule

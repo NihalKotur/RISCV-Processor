@@ -15,5 +15,4 @@ module datamem (
       data_array[addr[31:2]] <= wr_data;
     end
   end
-
 endmodule

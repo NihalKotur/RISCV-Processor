@@ -13,5 +13,4 @@ module pc (
       pc <= next_pc;
     end
   end
-
 endmodule

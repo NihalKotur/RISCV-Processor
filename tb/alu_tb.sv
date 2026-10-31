@@ -56,5 +56,4 @@ module alu_tb;
 
     $finish;
   end
-
 endmodule

@@ -66,5 +66,4 @@ module regfile_tb;
     #5;
     $finish;
     end
-
 endmodule

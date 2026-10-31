@@ -25,5 +25,4 @@ module regfile (
       reg_array[wr_addr] <= wr_data;
     end
   end
-
 endmodule

@@ -34,5 +34,4 @@ module immgen (
         end
     endcase
     end
-
 endmodule

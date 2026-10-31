@@ -6,16 +6,16 @@ module alu (
     output logic is_zero
   );
 
-  localparam ALU_ADD  = 4'b0000;
-  localparam ALU_SUB  = 4'b0001;
-  localparam ALU_AND  = 4'b0010;
-  localparam ALU_OR   = 4'b0011;
-  localparam ALU_XOR  = 4'b0100;
-  localparam ALU_SLL  = 4'b0101;
-  localparam ALU_SRL  = 4'b0110;
-  localparam ALU_SRA  = 4'b0111;
-  localparam ALU_LTS  = 4'b1000;
-  localparam ALU_LTUS = 4'b1001;
+  localparam ALU_ADD  = 4'b0000; // Addition
+  localparam ALU_SUB  = 4'b0001; // Subtraction
+  localparam ALU_AND  = 4'b0010; // Bitwise And
+  localparam ALU_OR   = 4'b0011; // Bitwise Or
+  localparam ALU_XOR  = 4'b0100; // Bitwise Exclusive Or
+  localparam ALU_SLL  = 4'b0101; // Logical Left Shift
+  localparam ALU_SRL  = 4'b0110; // Logical Right Shift
+  localparam ALU_SRA  = 4'b0111; // Arithmetic Right Shift
+  localparam ALU_LTS  = 4'b1000; // Signed Less Than
+  localparam ALU_LTUS = 4'b1001; // Unsigned Less Than
 
   always_comb begin
     case (operation)
