@@ -34,30 +34,30 @@ module regfile_tb;
     wr_adr = 0;
     wr_data = 0;
 
-    @(posedge clk);
-    #1
+    @(negedge clk);
+    #9
     wr_en = 1;
     wr_adr = 5'd0;
     wr_data = 32'd42;
 
-    @(posedge clk);
-    #1
+    @(negedge clk);
+    #9
     wr_adr = 5'd1;
     wr_data = 32'd123;
 
-    @(posedge clk);
-    #1
+    @(negedge clk);
+    #9
     wr_adr = 5'd2;
     wr_data = 32'd456;
 
-    @(posedge clk);
-    #1
+    @(negedge clk);
+    #9
     wr_en = 0;
     rd_adr_1 = 5'd1;
     rd_adr_2 = 5'd2;
 
-    @(posedge clk);
-    #1
+    @(negedge clk);
+    #9
     rd_adr_1 = 5'd0;
     rd_adr_2 = 5'd0;
 
