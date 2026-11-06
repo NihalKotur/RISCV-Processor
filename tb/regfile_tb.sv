@@ -1,6 +1,6 @@
 `timescale 1ns/1ps
 
-module regfile_tb;
+module regFile_TB;
   logic clk;
   logic wr_en;
   logic [4:0] rd_addr_1;
@@ -10,7 +10,7 @@ module regfile_tb;
   logic [31:0] rd_data_2;
   logic [31:0] wr_data;
 
-  regfile uut (
+  regFile uut (
     .clk(clk),
     .wr_en(wr_en),
     .rd_addr_1(rd_addr_1),
@@ -24,8 +24,8 @@ module regfile_tb;
   always #5 clk = ~clk;
 
   initial begin
-    $dumpfile("sim/regfile.vcd");
-    $dumpvars(0, regfile_tb);
+    $dumpfile("sim/regFile.vcd");
+    $dumpvars(0, regFile_TB);
 
     clk = 0;
     wr_en = 0;

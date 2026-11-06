@@ -1,6 +1,6 @@
 `timescale 1ns / 1ps
 
-module alu_tb;
+module alu_TB;
   logic [31:0] a;
   logic [31:0] b;
   logic [3:0] operation;
@@ -17,7 +17,7 @@ module alu_tb;
 
   initial begin
     $dumpfile("sim/alu.vcd");
-    $dumpvars(0, alu_tb);
+    $dumpvars(0, alu_TB);
 
     // Test 1: Addition
     a = 32'd5;

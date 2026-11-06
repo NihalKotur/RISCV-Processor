@@ -1,4 +1,4 @@
-module datamem (
+module dataMem (
     input logic clk,
     input logic wr_en,
     input logic [31:0] addr,

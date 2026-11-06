@@ -1,17 +1,17 @@
 `timescale 1ns/1ps
 
-module instrmem_tb;
+module instrMem_TB;
   logic [31:0] addr;
   logic [31:0] instr;
 
-  instrmem uut (
+  instrMem uut (
     .addr(addr),
     .instr(instr)
     );
 
   initial begin
-    $dumpfile("sim/instrmem.vcd");
-    $dumpvars(0, instrmem_tb);
+    $dumpfile("sim/instrMem.vcd");
+    $dumpvars(0, instrMem_TB);
 
     addr = 32'h0;
     #5

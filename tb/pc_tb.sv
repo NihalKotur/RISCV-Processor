@@ -1,6 +1,6 @@
 `timescale 1ns/1ps
 
-module pc_tb;
+module pc_TB;
   logic clk;
   logic n_rst;
   logic [31:0] next_pc;
@@ -17,7 +17,7 @@ module pc_tb;
 
   initial begin
     $dumpfile("sim/pc.vcd");
-    $dumpvars(0, pc_tb);
+    $dumpvars(0, pc_TB);
 
     clk = 0;
     n_rst = 0;

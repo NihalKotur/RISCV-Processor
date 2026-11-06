@@ -1,17 +1,17 @@
 `timescale 1ns/1ps
 
-module immgen_tb;
+module immGen_TB;
   logic [31:0] instr;
-  logic [31:0] imm_ext;
+  logic [31:0] imm_out;
 
-  immgen uut (
+  immGen uut (
     .instr(instr),
-    .imm_ext(imm_ext)
+    .imm_out(imm_out)
     );
 
   initial begin
-    $dumpfile("sim/immgen.vcd");
-    $dumpvars(0, immgen_tb);
+    $dumpfile("sim/immGen.vcd");
+    $dumpvars(0, immGen_TB);
 
     instr = 32'h0000_0013;
     #5

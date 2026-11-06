@@ -1,4 +1,4 @@
-module immgen (
+module immGen (
     input logic [32:0] instr,
     output logic [32:0] imm_out
   );
@@ -9,8 +9,6 @@ module immgen (
   always_comb
   begin
     unique case (opcode)
-        // R-types don't use any immediate values so they are "carried out" directly in the control unit and ALU
-
         // I-type
         7'b0010011, 7'b0000011, 7'b1100111: begin
             imm_out = {{20{instr[31]}}, instr[31:20]};

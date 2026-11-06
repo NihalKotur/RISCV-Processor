@@ -1,4 +1,4 @@
-module regfile (
+module regFile (
     input logic clk,
     input logic wr_en,
     input logic [4:0] rd_addr_1,

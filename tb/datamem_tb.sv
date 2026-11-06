@@ -1,13 +1,13 @@
 `timescale 1ns/1ps
 
-module datamem_tb;
+module dataMem_TB;
   logic clk;
   logic wr_en;
   logic [31:0] addr;
   logic [31:0] wr_data;
   logic [31:0] rd_data;
 
-  datamem uut (
+  dataMem uut (
     .clk(clk),
     .wr_en(wr_en),
     .addr(addr),
@@ -18,8 +18,8 @@ module datamem_tb;
   always #5 clk = ~clk;
 
   initial begin
-    $dumpfile("sim/datamem.vcd");
-    $dumpvars(0, datamem_tb);
+    $dumpfile("sim/dataMem.vcd");
+    $dumpvars(0, dataMem_TB);
 
     clk = 0;
     wr_en = 0;
