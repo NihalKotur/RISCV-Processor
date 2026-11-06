@@ -29,13 +29,17 @@ module topLayer (
     logic [31:0] alu_operand_b;
     logic [31:0] mem_rd_data;
     logic [31:0] reg_wr_data;
+    logic [3:0] alu_operation;
+    logic alu_zero;
 
-
+    // Branch/Jump wires
+    logic [31:0] pc_target;
+    logic branch_taken;
 
     // ----------Fetch----------
     pc pc_i (
         .clk(clk),
-        .n_rst(rst),
+        .rst(rst),
         .next_pc(pc_next),
         .pc(pc_current)
     );
@@ -65,7 +69,7 @@ module topLayer (
         .wr_addr(instr[11:7]),
         .wr_data(reg_wr_data),
         .rd_data_1(reg_rd_data_1),
-        .rd_data_2(reg_rd_data_2),
+        .rd_data_2(reg_rd_data_2)
     );
 
     immGen immGen_1 (
@@ -76,7 +80,7 @@ module topLayer (
     // ----------Execute----------
     assign alu_operand_b = alu_src ? imm_out : reg_rd_data_2;
 
-    // ALU Decoder
+    // ALU Decoder logic
     always_comb begin
         case (alu_op)
             2'b00: alu_operation = 4'b0000;
@@ -84,25 +88,26 @@ module topLayer (
             2'b10: begin
                 case (instr[14:12])
                     3'b000: alu_operation = (instr[30] && (instr[6:0] == 7'b0110011)) ? 4'b0001 : 4'b0000;
-                    3'b111: alu_operation = 4'b0010;
-                    3'b110: alu_operation = 4'b0011;
-                    3'b100: alu_operation = 4'b0100;
-                    3'b001: alu_operation = 4'b0101;
-                    3'b101: alu_operation = instr[30] ? 4'b0111 : 4'b0110;
-                    3'b010: alu_operation = 4'b1000;
-                    3'b011: alu_operation = 4'b1001;
+                    3'b111: alu_operation = 4'b0010; // AND
+                    3'b110: alu_operation = 4'b0011; // OR
+                    3'b100: alu_operation = 4'b0100; // XOR
+                    3'b001: alu_operation = 4'b0101; // SLL
+                    3'b101: alu_operation = instr[30] ? 4'b0111 : 4'b0110; // SRA / SRL
+                    3'b010: alu_operation = 4'b1000; // SLT
+                    3'b011: alu_operation = 4'b1001; // SLTU
                     default: alu_operation = 4'b0000;
                 endcase
             end
             default: alu_operation = 4'b0000;
         endcase
     end
-    
+
     alu alu_i (
         .a(reg_rd_data_1),
         .b(alu_operand_b),
         .operation(alu_operation),
-        .result(alu_result)
+        .result(alu_result),
+        .is_zero(alu_zero)
     );
 
     // ----------Memory----------
@@ -117,8 +122,11 @@ module topLayer (
     // ----------Writeback MUX----------
     assign reg_wr_data = result_src ? mem_rd_data : alu_result;
 
-    // ----------PC Iterate----------
+    // ----------Branch/Jump Logic----------
+    assign pc_target = pc_current + imm_out;
+    assign branch_taken = branch & alu_zero;
+
     assign pc = pc_current;
-    assign pc_next = pc_current + 32'd4;
+    assign pc_next = (jump | branch_taken) ? pc_target : (pc_current + 32'd4);
 
 endmodule

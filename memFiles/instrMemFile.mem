@@ -1,3 +1,4 @@
-00000013 // addi x0, x0, 0 (do nothing)
-00100293 // addi x5, x0, 1 (puts the number 1 into register x5)
-00228293 // addi x5, x5, 2 (adds 2 to register x5)
+00500093 // addi x1, x0, 5  (x1 = 5)
+00a00113 // addi x2, x0, 10 (x2 = 10)
+002081b3 // add    x3, x1, x2 (x3 = x1 + x2 = 15)
+00000013 // nop (addi x0, x0, 0) to pad or stop

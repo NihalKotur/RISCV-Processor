@@ -1,12 +1,12 @@
 module pc (
     input logic clk,
-    input logic n_rst,
+    input logic rst,
     input logic [31:0] next_pc,
     output logic [31:0] pc
   );
 
-  always @(posedge clk or negedge n_rst) begin
-    if (!n_rst) begin
+  always @(posedge clk or posedge rst) begin
+    if (rst) begin
       pc <= 32'h0;
     end
     else begin

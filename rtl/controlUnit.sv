@@ -1,9 +1,9 @@
 module controlUnit (
     input  logic [6:0] opcode,
     output logic reg_write,
-    output logic alu_scr,
+    output logic alu_src,
     output logic mem_write,
-    output logic result_scr,
+    output logic result_src,
     output logic branch,
     output logic jump,
     output logic [1:0] alu_op
@@ -11,9 +11,9 @@ module controlUnit (
 
   always_comb begin
     reg_write = 1'b0;
-    alu_scr = 1'b0;
+    alu_src = 1'b0;
     mem_write = 1'b0;
-    result_scr = 1'b0;
+    result_src = 1'b0;
     branch = 1'b0;
     jump = 1'b0;
     alu_op = 2'b00;
@@ -22,9 +22,9 @@ module controlUnit (
       // R-type
       7'b0110011: begin
         reg_write = 1'b1;
-        alu_scr = 1'b0;
+        alu_src = 1'b0;
         mem_write = 1'b0;
-        result_scr = 1'b0;
+        result_src = 1'b0;
         branch = 1'b0;
         jump = 1'b0;
         alu_op = 2'b10;
@@ -33,9 +33,9 @@ module controlUnit (
       // I-type
       7'b0010011: begin
         reg_write = 1'b1;
-        alu_scr = 1'b1;
+        alu_src = 1'b1;
         mem_write = 1'b0;
-        result_scr = 1'b0;
+        result_src = 1'b0;
         branch = 1'b0;
         jump = 1'b0;
         alu_op = 2'b10;
@@ -44,9 +44,9 @@ module controlUnit (
       // Load
       7'b0000011: begin
         reg_write = 1'b1;
-        alu_scr = 1'b1;
+        alu_src = 1'b1;
         mem_write = 1'b0;
-        result_scr = 1'b1;
+        result_src = 1'b1;
         branch = 1'b0;
         jump = 1'b0;
         alu_op = 2'b00;
@@ -55,9 +55,9 @@ module controlUnit (
       // Store
       7'b0100011: begin
         reg_write = 1'b0;
-        alu_scr = 1'b1;
+        alu_src = 1'b1;
         mem_write = 1'b1;
-        result_scr = 1'bx;
+        result_src = 1'bx;
         branch = 1'b0;
         jump = 1'b0;
         alu_op = 2'b00;
@@ -65,9 +65,9 @@ module controlUnit (
 
       // Branch
       7'b1100011: begin
-        alu_scr = 1'b0;
+        alu_src = 1'b0;
         mem_write = 1'b0;
-        result_scr = 1'bx;
+        result_src = 1'bx;
         branch = 1'b1;
         jump = 1'b0;
         alu_op = 2'b01;
