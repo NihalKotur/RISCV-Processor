@@ -1,6 +1,6 @@
 module immGen (
-    input logic [32:0] instr,
-    output logic [32:0] imm_out
+    input logic [31:0] instr,
+    output logic [31:0] imm_out
   );
 
   logic [6:0] opcode;
@@ -25,7 +25,7 @@ module immGen (
         end
 
         // U-type
-        7'b1100011: begin
+        7'b0110111: begin
             imm_out = {{19{instr[31]}}, instr[31], instr[7], instr[30:25], instr[11:8], 1'b0};
         end
 

@@ -2,8 +2,7 @@ module topLayer (
     input logic clk,
     input logic rst,
     output logic [31:0] pc,
-    output logic [31:0] alu_result,
-
+    output logic [31:0] alu_result
 );
     // pc/instrMem stuff
     logic [31:0] pc_current;
@@ -26,11 +25,17 @@ module topLayer (
     // immGen out
     logic [31:0] imm_out;
 
+    // alu stuff
+    logic [31:0] alu_operand_b;
+    logic [31:0] mem_rd_data;
+    logic [31:0] reg_wr_data;
 
 
+
+    // ----------Fetch----------
     pc pc_i (
         .clk(clk),
-        .rst(rst),
+        .n_rst(rst),
         .next_pc(pc_next),
         .pc(pc_current)
     );
@@ -40,6 +45,7 @@ module topLayer (
         .instr(instr)
     );
 
+    // ----------Decode----------
     controlUnit controlUnit_i (
         .opcode(instr[6:0]),
         .reg_write(reg_wr_en),
@@ -57,7 +63,7 @@ module topLayer (
         .rd_addr_1(instr[19:15]),
         .rd_addr_2(instr[24:20]),
         .wr_addr(instr[11:7]),
-        .wr_data(DO THIS DONT FORGET THIS),
+        .wr_data(reg_wr_data),
         .rd_data_1(reg_rd_data_1),
         .rd_data_2(reg_rd_data_2),
     );
@@ -67,8 +73,51 @@ module topLayer (
         .imm_out(imm_out)
     );
 
-    // ALU and dataMem stuff pending
+    // ----------Execute----------
+    assign alu_operand_b = alu_src ? imm_out : reg_rd_data_2;
 
+    // ALU Decoder
+    always_comb begin
+        case (alu_op)
+            2'b00: alu_operation = 4'b0000;
+            2'b01: alu_operation = 4'b0001;
+            2'b10: begin
+                case (instr[14:12])
+                    3'b000: alu_operation = (instr[30] && (instr[6:0] == 7'b0110011)) ? 4'b0001 : 4'b0000;
+                    3'b111: alu_operation = 4'b0010;
+                    3'b110: alu_operation = 4'b0011;
+                    3'b100: alu_operation = 4'b0100;
+                    3'b001: alu_operation = 4'b0101;
+                    3'b101: alu_operation = instr[30] ? 4'b0111 : 4'b0110;
+                    3'b010: alu_operation = 4'b1000;
+                    3'b011: alu_operation = 4'b1001;
+                    default: alu_operation = 4'b0000;
+                endcase
+            end
+            default: alu_operation = 4'b0000;
+        endcase
+    end
+    
+    alu alu_i (
+        .a(reg_rd_data_1),
+        .b(alu_operand_b),
+        .operation(alu_operation),
+        .result(alu_result)
+    );
+
+    // ----------Memory----------
+    dataMem dataMem_i (
+        .clk(clk),
+        .wr_en(mem_wr_en),
+        .addr(alu_result),
+        .wr_data(reg_rd_data_2),
+        .rd_data(mem_rd_data)
+    );
+
+    // ----------Writeback MUX----------
+    assign reg_wr_data = result_src ? mem_rd_data : alu_result;
+
+    // ----------PC Iterate----------
     assign pc = pc_current;
     assign pc_next = pc_current + 32'd4;
 

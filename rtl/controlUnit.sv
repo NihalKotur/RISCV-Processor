@@ -64,8 +64,7 @@ module controlUnit (
         end
 
       // Branch
-      7'bj100011: begin
-        alu_opwrite = 1'b0;
+      7'b1100011: begin
         alu_scr = 1'b0;
         mem_write = 1'b0;
         result_scr = 1'bx;
