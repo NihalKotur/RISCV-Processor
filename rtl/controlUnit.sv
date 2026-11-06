@@ -7,9 +7,9 @@ module controlUnit (
     output logic branch,
     output logic jump,
     output logic [1:0] alu_op
-);
+  );
 
-always_comb begin
+  always_comb begin
     reg_write = 1'b0;
     alu_scr = 1'b0;
     mem_write = 1'b0;
@@ -19,63 +19,62 @@ always_comb begin
     alu_op = 2'b00;
 
     case (opcode)
-        // R-type
-        7'b0110011: begin
-            reg_write = 1'b1;
-            alu_scr = 1'b0;
-            mem_write = 1'b0;
-            result_scr = 1'b0;
-            branch = 1'b0;
-            jump = 1'b0;
-            alu_op = 2'b10;
+      // R-type
+      7'b0110011: begin
+        reg_write = 1'b1;
+        alu_scr = 1'b0;
+        mem_write = 1'b0;
+        result_scr = 1'b0;
+        branch = 1'b0;
+        jump = 1'b0;
+        alu_op = 2'b10;
         end
 
-        // I-type 
-        7'b0010011: begin
-            reg_write = 1'b1;
-            alu_scr = 1'b1;
-            mem_write = 1'b0;
-            result_scr = 1'b0;
-            branch = 1'b0;
-            jump = 1'b0;
-            alu_op = 2'b10;
+      // I-type
+      7'b0010011: begin
+        reg_write = 1'b1;
+        alu_scr = 1'b1;
+        mem_write = 1'b0;
+        result_scr = 1'b0;
+        branch = 1'b0;
+        jump = 1'b0;
+        alu_op = 2'b10;
         end
 
-        // Load
-        7'b0000011: begin
-            reg_write = 1'b1;
-            alu_scr = 1'b1;
-            mem_write = 1'b0;
-            result_scr = 1'b1;
-            branch = 1'b0;
-            jump = 1'b0;
-            alu_op = 2'b00;
+      // Load
+      7'b0000011: begin
+        reg_write = 1'b1;
+        alu_scr = 1'b1;
+        mem_write = 1'b0;
+        result_scr = 1'b1;
+        branch = 1'b0;
+        jump = 1'b0;
+        alu_op = 2'b00;
         end
 
-        // Store
-        7'b0100011: begin
-            reg_write = 1'b0;
-            alu_scr = 1'b1;
-            mem_write = 1'b1;
-            result_scr = 1'bx;
-            branch = 1'b0;
-            jump = 1'b0;
-            alu_op = 2'b00;
+      // Store
+      7'b0100011: begin
+        reg_write = 1'b0;
+        alu_scr = 1'b1;
+        mem_write = 1'b1;
+        result_scr = 1'bx;
+        branch = 1'b0;
+        jump = 1'b0;
+        alu_op = 2'b00;
         end
 
-        // Branch
-        7'bj100011: begin
-           alu_opwrite = 1'b0;
-            alu_scr = 1'b0;
-            mem_write = 1'b0;
-            result_scr = 1'bx;
-            branch = 1'b1;
-            jump = 1'b0;
-            alu_op = 2'b01;
+      // Branch
+      7'bj100011: begin
+        alu_opwrite = 1'b0;
+        alu_scr = 1'b0;
+        mem_write = 1'b0;
+        result_scr = 1'bx;
+        branch = 1'b1;
+        jump = 1'b0;
+        alu_op = 2'b01;
         end
 
-        default: begin
-        end
-        endcase
-    end
+      default: begin end
+    endcase
+  end
 endmodule
