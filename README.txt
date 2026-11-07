@@ -1,26 +1,28 @@
-Instruction Set is stored in memFiles/instrMemFile.mem
+# Single-Cycle RV32I RISC-V Processor
 
-Running the testbenches on Surfer:
-pc_TB.sv:
-iverilog -g2012 -o sim/pc_TB.vvp rtl/pc.sv tb/pc_TB.sv && vvp sim/pc_TB.vvp && surfer sim/pc.vcd
+A full single-cycle 32-bit RISC-V processor written in SystemVerilog, designed and verified using Icarus Verilog (in VSCode) and Surfer.
 
-alu_TB.sv:
-iverilog -g2012 -o sim/alu_TB.vvp rtl/alu.sv tb/alu_TB.sv && vvp sim/alu_TB.vvp && surfer sim/alu.vcd
+## Features
+* **RV32I Base Instruction Set**: Supports R-type arithmetic/logic, I-type immediate math/loads, S-type stores, B-type conditional branches, and J-type jumps.
+* **Harvard Architecture**: Separate instruction memory (`instrMem`) and data memory (`dataMem`).
+* **Modular Datapath**: Separated logic for the Program Counter, Register File, ALU, Immediate Generator, Control Unit, and Data/Instruction memories integrated via `topLayer.sv`.
+* **Individual Testbenches**: Testbenches used for every .sv file (other than ControlUnit) to test individual components before combining them.
 
-controlUnit_TB.sv:
-NOT IMPLEMENTED YET
+## Project Structure
+```text
+├── rtl/
+│   ├── topLayer.sv      # Top-level datapath and control wiring
+│   ├── alu.sv           # Arithmetic Logic Unit (4-bit control)
+│   ├── controlUnit.sv   # Main decoding logic for instruction types
+│   ├── regFile.sv       # 32x32 bit register file (x0000 permanently set to 0)
+│   ├── immGen.sv        # Immediate extension unit (I, S, B, U, J types)
+│   ├── pc.sv            # Program Counter with active-low reset
+│   ├── instrMem.sv      # Instruction memory (loads instrMemFile.mem)
+│   └── dataMem.sv       # Word-addressable data RAM
+├── tb/
+│   └── topLayer_TB.sv
+└── memFiles/
+    └── instrMemFile.mem
 
-immGen_TB.sv:
-iverilog -g2012 -o sim/immGen_TB.vvp rtl/immGen.sv tb/immGen_TB.sv && vvp sim/immGen_TB.vvp && surfer sim/immGen.vcd
-
-regFile_TB.sv:
-iverilog -g2012 -o sim/regFile_TB.vvp rtl/regFile.sv tb/regFile_TB.sv && vvp sim/regFile_TB.vvp && surfer sim/regFile.vcd
-
-dataMem_TB.sv:
-iverilog -g2012 -o sim/dataMem_TB.vvp rtl/dataMem.sv tb/dataMem_TB.sv && vvp sim/dataMem_TB.vvp && surfer sim/dataMem.vcd
-
-instrMem_TB.sv:
-iverilog -g2012 -o sim/instrMem_TB.vvp rtl/instrMem.sv tb/instrMem_TB.sv && vvp sim/instrMem_TB.vvp && surfer sim/instrMem.vcd
-
-topLayer_TB.sv (MAIN TEST BENCH):
+Run With: 
 iverilog -g2012 -o sim/topLayer_TB.vvp rtl/topLayer.sv tb/topLayer_TB.sv && vvp sim/topLayer_TB.vvp && surfer sim/topLayer.vcd
