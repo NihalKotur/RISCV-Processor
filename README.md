@@ -17,8 +17,8 @@ A full single-cycle 32-bit RISC-V processor written in SystemVerilog, designed a
 │   ├── regFile.sv       # 32x32 bit register file (x0000 permanently set to 0)
 │   ├── immGen.sv        # Immediate extension unit (I, S, B, U, J types)
 │   ├── pc.sv            # Program Counter with active-low reset
-│   ├── instrMem.sv      # Instruction memory (loads instrMemFile.mem)
-│   └── dataMem.sv       # Word-addressable data RAM
+│   ├── instrMem.sv      # 256x32 bit instruction memory (loads instrMemFile.mem)
+│   └── dataMem.sv       # 256x32 bit data RAM
 ├── tb/
 │   └── topLayer_TB.sv
 └── memFiles/
