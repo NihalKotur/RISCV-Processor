@@ -4,9 +4,9 @@ A full single-cycle 32-bit RISC-V processor written in SystemVerilog, designed a
 
 ## Features
 * **RV32I Base Instruction Set**: Supports R-type arithmetic/logic, I-type immediate math/loads, S-type stores, B-type conditional branches, and J-type jumps.
-* **Harvard Architecture**: Separate instruction memory (`instrMem`) and data memory (`dataMem`).
+* **Harvard Architecture**: Separate instruction memory (`instrMem.sv`) and data memory (`dataMem.sv`).
 * **Modular Datapath**: Separated logic for the Program Counter, Register File, ALU, Immediate Generator, Control Unit, and Data/Instruction memories integrated via `topLayer.sv`.
-* **Individual Testbenches**: Testbenches used for every .sv file (other than ControlUnit) to test individual components before combining them.
+* **Individual Testbenches**: Testbenches used for every .sv file (except for `ControlUnit.sv`) to test individual components before combining them.
 
 ## Project Structure
 ```text
@@ -23,6 +23,7 @@ A full single-cycle 32-bit RISC-V processor written in SystemVerilog, designed a
 │   └── topLayer_TB.sv
 └── memFiles/
     └── instrMemFile.mem
+```
 
 ## Run With: 
 iverilog -g2012 -o sim/topLayer_TB.vvp rtl/topLayer.sv tb/topLayer_TB.sv && vvp sim/topLayer_TB.vvp && surfer sim/topLayer.vcd
