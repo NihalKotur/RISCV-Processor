@@ -4,7 +4,7 @@ module topLayer (
     output logic [31:0] pc,
     output logic [31:0] alu_result
 );
-    // pc/instrMem stuff
+    // pc/instrReg stuff
     logic [31:0] pc_current;
     logic [31:0] pc_next;
     logic [31:0] instr;
@@ -44,7 +44,7 @@ module topLayer (
         .pc(pc_current)
     );
 
-    instrMem instrMem_i (
+    instrReg instrReg_i (
         .addr(pc_current),
         .instr(instr)
     );

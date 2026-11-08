@@ -26,4 +26,4 @@ A full single-cycle 32-bit RISC-V processor written in SystemVerilog, designed a
 ```
 
 ## Run With: 
-iverilog -g2012 -o sim/topLayer_TB.vvp rtl/topLayer.sv tb/topLayer_TB.sv && vvp sim/topLayer_TB.vvp && surfer sim/topLayer.vcd
+iverilog -g2012 -o sim/topLayer_TB.vvp rtl/*.sv tb/topLayer_TB.sv && vvp sim/topLayer_TB.vvp && surfer sim/topLayer.vcd
