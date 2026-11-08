@@ -34,7 +34,7 @@ module regFile_TB;
     wr_addr = 0;
     wr_data = 0;
 
-    #5
+    #10
 
     @(posedge clk);
     #1
@@ -63,7 +63,7 @@ module regFile_TB;
     rd_addr_1 = 5'd0;
     rd_addr_2 = 5'd0;
 
-    #5;
+    #10;
     $finish;
     end
 endmodule

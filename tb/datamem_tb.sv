@@ -26,7 +26,7 @@ module dataMem_TB;
     addr = 32'h0;
     wr_data = 32'h0;
 
-    #5;
+    #10;
 
     @(posedge clk);
     #1
@@ -54,7 +54,7 @@ module dataMem_TB;
     #1
     addr = 32'h4;
 
-    #5;
+    #10;
     $finish;
   end
 endmodule

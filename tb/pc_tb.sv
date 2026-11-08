@@ -23,7 +23,8 @@ module pc_TB;
     n_rst = 0;
     next_pc = 32'h0000_0000;
 
-    #12;
+    #10;
+    
     n_rst = 1;
 
     #10 next_pc = 32'h0000_0004;
@@ -31,8 +32,7 @@ module pc_TB;
     #10 next_pc = 32'h0000_000C;
     #10 next_pc = 32'h0000_0010;
 
-    #20;
-    $display("Simulation Done!");
+    #10;
     $finish;
     end
 endmodule
